@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 type Stat = {
   label: string;
@@ -23,6 +24,8 @@ type Activity = {
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, DecimalPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -1,9 +1,9 @@
-<div class="min-h-screen bg-slate-950 text-slate-100">
+<div class="min-h-screen bg-slate-950 text-slate-100 overflow-hidden">
   <!-- Ambient glow -->
   <div class="pointer-events-none fixed inset-0">
-    <div class="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-cyan-500/30 blur-[120px]"></div>
-    <div class="absolute top-40 right-0 h-96 w-96 rounded-full bg-fuchsia-500/25 blur-[140px]"></div>
-    <div class="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-emerald-500/20 blur-[120px]"></div>
+    <div class="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-cyan-500/30 blur-[120px] float-slow"></div>
+    <div class="absolute top-40 right-0 h-96 w-96 rounded-full bg-fuchsia-500/25 blur-[140px] float-medium"></div>
+    <div class="absolute bottom-0 left-1/3 h-72 w-72 rounded-full bg-emerald-500/20 blur-[120px] float-fast"></div>
   </div>
 
   <div class="relative z-10 flex">
@@ -13,14 +13,14 @@
         <span class="text-cyan-300">Hamdolillah</span>
       </div>
       <nav class="flex-1 px-4 py-3 space-y-1 text-sm">
-        <a class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 text-white shadow-[0_0_18px_rgba(34,211,238,0.35)]" href="#">
+        <button class="nav-item" [class.nav-active]="activeSection === 'Dashboard'" (click)="selectSection('Dashboard')">
           <span class="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.9)]"></span>
           Dashboard
-        </a>
-        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-300 hover:bg-white/5" href="#">Pulse</a>
-        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-300 hover:bg-white/5" href="#">Projects</a>
-        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-300 hover:bg-white/5" href="#">Team</a>
-        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-300 hover:bg-white/5" href="#">Settings</a>
+        </button>
+        <button class="nav-item" [class.nav-active]="activeSection === 'Pulse'" (click)="selectSection('Pulse')">Pulse</button>
+        <button class="nav-item" [class.nav-active]="activeSection === 'Projects'" (click)="selectSection('Projects')">Projects</button>
+        <button class="nav-item" [class.nav-active]="activeSection === 'Team'" (click)="selectSection('Team')">Team</button>
+        <button class="nav-item" [class.nav-active]="activeSection === 'Settings'" (click)="selectSection('Settings')">Settings</button>
       </nav>
       <div class="p-4 border-t border-white/10">
         <div class="text-xs text-slate-400">Signed in as</div>
@@ -35,32 +35,38 @@
         <div class="font-semibold">Neon Command Center</div>
         <div class="flex items-center gap-3">
           <input class="hidden sm:block w-64 px-3 py-2 text-sm border border-white/10 rounded-lg bg-white/5 placeholder:text-slate-400" placeholder="Search" />
-          <button class="px-3 py-2 text-sm bg-cyan-500/80 text-white rounded-lg shadow-[0_0_18px_rgba(34,211,238,0.6)] hover:bg-cyan-400/80">New Pulse</button>
+          <button class="action-btn" (click)="triggerPulse()">New Pulse</button>
         </div>
       </div>
 
       <div class="p-6 space-y-6">
+        <!-- Ticker -->
+        <div class="glass-card glow-border">
+          <div class="flex items-center justify-between">
+            <div class="font-semibold">Live Market Feed</div>
+            <div class="text-xs text-slate-400">Simulated every 1.8s</div>
+          </div>
+          <div class="mt-4 grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div class="ticker-card" *ngFor="let ticker of tickers" [class.up]="ticker.trend === 'up'" [class.down]="ticker.trend === 'down'">
+              <div class="text-xs text-slate-400">{{ ticker.symbol }}</div>
+              <div class="text-lg font-semibold">{{ ticker.price | number:'1.2-2' }}</div>
+              <div class="text-xs" [class.text-emerald-300]="ticker.trend === 'up'" [class.text-rose-300]="ticker.trend === 'down'" [class.text-slate-400]="ticker.trend === 'flat'">
+                {{ ticker.change >= 0 ? '+' : '' }}{{ ticker.change | number:'1.2-2' }}
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Stats -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="glass-card">
-            <div class="text-xs text-slate-400">Energy</div>
-            <div class="text-2xl font-semibold mt-2 text-cyan-200">84,290</div>
-            <div class="text-xs text-emerald-300 mt-1">+12.4% glow</div>
-          </div>
-          <div class="glass-card">
-            <div class="text-xs text-slate-400">Active Nodes</div>
-            <div class="text-2xl font-semibold mt-2 text-fuchsia-200">12,480</div>
-            <div class="text-xs text-emerald-300 mt-1">+5.1% sync</div>
-          </div>
-          <div class="glass-card">
-            <div class="text-xs text-slate-400">Alerts</div>
-            <div class="text-2xl font-semibold mt-2 text-rose-200">1,240</div>
-            <div class="text-xs text-rose-300 mt-1">-2.3% noise</div>
-          </div>
-          <div class="glass-card">
-            <div class="text-xs text-slate-400">Conversion</div>
-            <div class="text-2xl font-semibold mt-2 text-emerald-200">3.9%</div>
-            <div class="text-xs text-emerald-300 mt-1">+0.4% flow</div>
+          <div class="glass-card stat-card" *ngFor="let stat of stats" [class.up]="stat.trend === 'up'" [class.down]="stat.trend === 'down'">
+            <div class="text-xs text-slate-400">{{ stat.label }}</div>
+            <div class="text-2xl font-semibold mt-2">
+              {{ stat.value | number:'1.0-2' }}<span *ngIf="stat.unit">{{ stat.unit }}</span>
+            </div>
+            <div class="text-xs mt-1" [class.text-emerald-300]="stat.trend === 'up'" [class.text-rose-300]="stat.trend === 'down'" [class.text-slate-400]="stat.trend === 'flat'">
+              {{ stat.delta >= 0 ? '+' : '' }}{{ stat.delta | number:'1.1-2' }}% drift
+            </div>
           </div>
         </div>
 
@@ -71,18 +77,45 @@
               <div class="font-semibold">Neon Traffic</div>
               <div class="text-xs text-slate-400">Last 30 cycles</div>
             </div>
-            <div class="mt-4 h-48 rounded-lg border border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-800/60 flex items-center justify-center text-slate-400 text-sm">
+            <div class="mt-4 h-48 rounded-lg border border-white/10 bg-gradient-to-br from-slate-900/80 to-slate-800/60 flex items-center justify-center text-slate-400 text-sm shimmer">
               Spectrum chart placeholder
             </div>
           </div>
           <div class="glass-card">
             <div class="font-semibold">Live Activity</div>
             <ul class="mt-4 space-y-3 text-sm">
-              <li class="flex justify-between"><span>New pulse</span><span class="text-slate-400">2m</span></li>
-              <li class="flex justify-between"><span>Voltage spike</span><span class="text-slate-400">10m</span></li>
-              <li class="flex justify-between"><span>System sync</span><span class="text-slate-400">1h</span></li>
-              <li class="flex justify-between"><span>Quantum ping</span><span class="text-slate-400">3h</span></li>
+              <li class="flex justify-between" *ngFor="let item of activity">
+                <span [class.text-emerald-200]="item.tone === 'success'" [class.text-amber-200]="item.tone === 'warn'">{{ item.label }}</span>
+                <span class="text-slate-400">{{ item.time }}</span>
+              </li>
             </ul>
+          </div>
+        </div>
+
+        <!-- Actions + Console -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2 glass-card">
+            <div class="flex items-center justify-between">
+              <div class="font-semibold">Action Console</div>
+              <div class="text-xs text-slate-400">{{ pulseCount }} pulses sent</div>
+            </div>
+            <div class="mt-4 p-4 rounded-lg border border-white/10 bg-white/5 text-sm text-slate-300">
+              {{ lastAction }}
+            </div>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <button class="chip-btn" (click)="launchScan()">Launch Scan</button>
+              <button class="chip-btn" (click)="syncNodes()">Sync Nodes</button>
+              <button class="chip-btn" (click)="generateReport()">Generate Report</button>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="font-semibold">System Signals</div>
+            <div class="mt-4 space-y-3 text-sm">
+              <div class="signal">Latency: 18ms</div>
+              <div class="signal">Throughput: 1.2Gb/s</div>
+              <div class="signal">Stability: 99.2%</div>
+              <div class="signal">Cache: 82% warm</div>
+            </div>
           </div>
         </div>
 
@@ -90,7 +123,7 @@
         <div class="glass-card">
           <div class="flex items-center justify-between">
             <div class="font-semibold">Recent Missions</div>
-            <button class="text-sm text-cyan-300 hover:text-cyan-200">View all</button>
+            <button class="text-sm text-cyan-300 hover:text-cyan-200" (click)="viewAll()">View all</button>
           </div>
           <div class="mt-4 overflow-x-auto">
             <table class="w-full text-sm">
@@ -103,23 +136,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-t border-white/10">
-                  <td class="py-2">Aurora UI</td>
-                  <td class="py-2"><span class="px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-200 text-xs">On Track</span></td>
-                  <td class="py-2">Amina</td>
-                  <td class="py-2">Feb 20</td>
-                </tr>
-                <tr class="border-t border-white/10">
-                  <td class="py-2">Photon App</td>
-                  <td class="py-2"><span class="px-2 py-1 rounded-full bg-amber-500/20 text-amber-200 text-xs">At Risk</span></td>
-                  <td class="py-2">Yassine</td>
-                  <td class="py-2">Mar 12</td>
-                </tr>
-                <tr class="border-t border-white/10">
-                  <td class="py-2">Neon API</td>
-                  <td class="py-2"><span class="px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-200 text-xs">On Track</span></td>
-                  <td class="py-2">Sara</td>
-                  <td class="py-2">Mar 28</td>
+                <tr class="border-t border-white/10" *ngFor="let mission of missions">
+                  <td class="py-2">{{ mission.project }}</td>
+                  <td class="py-2">
+                    <span class="px-2 py-1 rounded-full text-xs" [class.bg-emerald-500/20]="mission.status === 'On Track'" [class.text-emerald-200]="mission.status === 'On Track'" [class.bg-amber-500/20]="mission.status === 'At Risk'" [class.text-amber-200]="mission.status === 'At Risk'">
+                      {{ mission.status }}
+                    </span>
+                  </td>
+                  <td class="py-2">{{ mission.owner }}</td>
+                  <td class="py-2">{{ mission.due }}</td>
                 </tr>
               </tbody>
             </table>

@@ -1,0 +1,122 @@
+<div class="min-h-screen bg-slate-50">
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="hidden md:flex md:w-64 md:flex-col border-r bg-white">
+      <div class="h-16 flex items-center px-6 font-semibold text-lg">Hamdolillah</div>
+      <nav class="flex-1 px-4 py-2 space-y-1 text-sm">
+        <a class="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 text-slate-900" href="#">
+          <span class="h-2 w-2 rounded-full bg-primary"></span>
+          Dashboard
+        </a>
+        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50" href="#">Analytics</a>
+        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50" href="#">Projects</a>
+        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50" href="#">Team</a>
+        <a class="flex items-center gap-2 px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-50" href="#">Settings</a>
+      </nav>
+      <div class="p-4 border-t">
+        <div class="text-xs text-slate-500">Signed in as</div>
+        <div class="font-medium">bilaldevx</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="flex-1">
+      <!-- Top bar -->
+      <div class="h-16 bg-white border-b flex items-center justify-between px-6">
+        <div class="font-semibold">Dashboard Overview</div>
+        <div class="flex items-center gap-3">
+          <input class="hidden sm:block w-64 px-3 py-2 text-sm border rounded-lg bg-slate-50" placeholder="Search" />
+          <button class="px-3 py-2 text-sm bg-primary text-white rounded-lg">New Report</button>
+        </div>
+      </div>
+
+      <div class="p-6 space-y-6">
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white border rounded-xl p-4">
+            <div class="text-xs text-slate-500">Revenue</div>
+            <div class="text-2xl font-semibold mt-2">$84,290</div>
+            <div class="text-xs text-emerald-600 mt-1">+12.4% this month</div>
+          </div>
+          <div class="bg-white border rounded-xl p-4">
+            <div class="text-xs text-slate-500">Active Users</div>
+            <div class="text-2xl font-semibold mt-2">12,480</div>
+            <div class="text-xs text-emerald-600 mt-1">+5.1% this week</div>
+          </div>
+          <div class="bg-white border rounded-xl p-4">
+            <div class="text-xs text-slate-500">New Orders</div>
+            <div class="text-2xl font-semibold mt-2">1,240</div>
+            <div class="text-xs text-rose-600 mt-1">-2.3% today</div>
+          </div>
+          <div class="bg-white border rounded-xl p-4">
+            <div class="text-xs text-slate-500">Conversion</div>
+            <div class="text-2xl font-semibold mt-2">3.9%</div>
+            <div class="text-xs text-emerald-600 mt-1">+0.4% this week</div>
+          </div>
+        </div>
+
+        <!-- Charts + Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2 bg-white border rounded-xl p-4">
+            <div class="flex items-center justify-between">
+              <div class="font-semibold">Traffic Overview</div>
+              <div class="text-xs text-slate-500">Last 30 days</div>
+            </div>
+            <div class="mt-4 h-48 rounded-lg bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-500 text-sm">
+              Chart placeholder
+            </div>
+          </div>
+          <div class="bg-white border rounded-xl p-4">
+            <div class="font-semibold">Activity</div>
+            <ul class="mt-4 space-y-3 text-sm">
+              <li class="flex justify-between"><span>New signup</span><span class="text-slate-500">2m</span></li>
+              <li class="flex justify-between"><span>Payment received</span><span class="text-slate-500">10m</span></li>
+              <li class="flex justify-between"><span>Server restarted</span><span class="text-slate-500">1h</span></li>
+              <li class="flex justify-between"><span>New ticket</span><span class="text-slate-500">3h</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white border rounded-xl p-4">
+          <div class="flex items-center justify-between">
+            <div class="font-semibold">Recent Projects</div>
+            <button class="text-sm text-primary">View all</button>
+          </div>
+          <div class="mt-4 overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead class="text-slate-500">
+                <tr class="text-left">
+                  <th class="py-2">Project</th>
+                  <th class="py-2">Status</th>
+                  <th class="py-2">Owner</th>
+                  <th class="py-2">Due</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t">
+                  <td class="py-2">Website Redesign</td>
+                  <td class="py-2"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs">On Track</span></td>
+                  <td class="py-2">Amina</td>
+                  <td class="py-2">Feb 20</td>
+                </tr>
+                <tr class="border-t">
+                  <td class="py-2">Mobile App</td>
+                  <td class="py-2"><span class="px-2 py-1 rounded-full bg-amber-50 text-amber-700 text-xs">At Risk</span></td>
+                  <td class="py-2">Yassine</td>
+                  <td class="py-2">Mar 12</td>
+                </tr>
+                <tr class="border-t">
+                  <td class="py-2">Analytics API</td>
+                  <td class="py-2"><span class="px-2 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs">On Track</span></td>
+                  <td class="py-2">Sara</td>
+                  <td class="py-2">Mar 28</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

@@ -55,6 +55,14 @@
   transform: translateY(-1px);
 }
 
+.action-btn:focus-visible,
+.chip-btn:focus-visible,
+.nav-item:focus-visible {
+  outline: 2px solid rgba(34, 211, 238, 0.8);
+  outline-offset: 2px;
+  box-shadow: 0 0 18px rgba(34, 211, 238, 0.55);
+}
+
 .chip-btn {
   padding: 0.5rem 1rem;
   border-radius: 999px;
@@ -74,6 +82,22 @@
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.05);
+}
+
+.search-input:focus-visible {
+  outline: 2px solid rgba(236, 72, 153, 0.75);
+  outline-offset: 2px;
+  border-color: rgba(236, 72, 153, 0.6);
+  box-shadow: 0 0 16px rgba(236, 72, 153, 0.45);
+}
+
+.mission-row {
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mission-row:hover {
+  background: rgba(15, 23, 42, 0.6);
+  box-shadow: inset 3px 0 0 rgba(34, 211, 238, 0.6);
 }
 
 .stat-card {

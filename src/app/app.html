@@ -34,7 +34,7 @@
       <div class="h-16 border-b border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-between px-6">
         <div class="font-semibold">Neon Command Center</div>
         <div class="flex items-center gap-3">
-          <input class="hidden sm:block w-64 px-3 py-2 text-sm border border-white/10 rounded-lg bg-white/5 placeholder:text-slate-400" placeholder="Search" />
+          <input class="search-input hidden sm:block w-64 px-3 py-2 text-sm border border-white/10 rounded-lg bg-white/5 placeholder:text-slate-400" placeholder="Search" />
           <button class="action-btn" (click)="triggerPulse()">New Pulse</button>
         </div>
       </div>
@@ -136,7 +136,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-t border-white/10" *ngFor="let mission of missions">
+                <tr class="border-t border-white/10 mission-row" *ngFor="let mission of missions">
                   <td class="py-2">{{ mission.project }}</td>
                   <td class="py-2">
                     <span class="px-2 py-1 rounded-full text-xs" [class.bg-emerald-500/20]="mission.status === 'On Track'" [class.text-emerald-200]="mission.status === 'On Track'" [class.bg-amber-500/20]="mission.status === 'At Risk'" [class.text-amber-200]="mission.status === 'At Risk'">
